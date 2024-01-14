@@ -1401,13 +1401,26 @@ class ocpoc_zynq(linux):
         )
 
 class bbbmini(linux):
-    toolchain = 'arm-linux-gnueabihf'
+    toolchain = 'aarch64-linux-gnu'
 
     def __init__(self):
         self.with_can = True
 
     def configure_env(self, cfg, env):
         super(bbbmini, self).configure_env(cfg, env)
+        cfg.env.HAL_NUM_CAN_IFACES = 1
+        env.DEFINES.update(
+            CONFIG_HAL_BOARD_SUBTYPE = 'HAL_BOARD_SUBTYPE_LINUX_BBBMINI',
+        )
+
+class bbbminifire(linux):
+    toolchain = 'riscv64-linux-gnu'
+
+    def __init__(self):
+        self.with_can = True
+
+    def configure_env(self, cfg, env):
+        super(bbbminifire, self).configure_env(cfg, env)
         cfg.env.HAL_NUM_CAN_IFACES = 1
         env.DEFINES.update(
             CONFIG_HAL_BOARD_SUBTYPE = 'HAL_BOARD_SUBTYPE_LINUX_BBBMINI',
