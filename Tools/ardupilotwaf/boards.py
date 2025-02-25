@@ -997,7 +997,7 @@ class esp32s3(esp32):
 
 class chibios(Board):
     abstract = True
-    toolchain = 'arm-none-eabi'
+#toolchain = 'arm-none-eabi'
 
     def configure_env(self, cfg, env):
         if hasattr(self, 'hwdef'):
@@ -1326,6 +1326,15 @@ class linux(Board):
         # get name of class
         return self.__class__.__name__
 
+class pfsoc(chibios):
+    toolchain = 'riscv64-elf'
+    name = 'pfsoc'
+    def configure_env(self, cfg, env):
+        super(pfsoc, self).configure_env(cfg, env)
+
+        env.DEFINES.update(
+            CONFIG_HAL_BOARD_SUBTYPE='HAL_BOARD_SUBTYPE_CHIBIOS_PFSOC',
+        )
 
 class navigator(linux):
     toolchain = 'arm-linux-gnueabihf'
