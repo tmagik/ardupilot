@@ -114,9 +114,9 @@ class build_binaries(object):
             if os.path.exists(gcc_path):
                 # setup PATH to point at the right compiler, and setup to use ccache
                 env = os.environ.copy()
-                env["PATH"] = gcc_path + ":" + env["PATH"]
-                env["CC"] = "ccache arm-none-eabi-gcc"
-                env["CXX"] = "ccache arm-none-eabi-g++"
+#env["PATH"] = gcc_path + ":" + env["PATH"]
+#                env["CC"] = "ccache arm-none-eabi-gcc"
+#                env["CXX"] = "ccache arm-none-eabi-g++"
             else:
                 raise Exception("BB-WAF: Missing compiler %s" % gcc_path)
         self.run_program("BB-WAF", cmd_list, env=env)
